@@ -1,11 +1,12 @@
 #' Set brightness for a rijkspalette
 #'
+#' Proper method stuff will be there soon.
+#'
 #' @param rp rijkspalette object
 #' @param brightness between 0 (darkest) and 1 (brightest)
 #'
-#' @exportMethod setBrightness
-#' @method setBrightness rijkspalette
-setBrightness.rijkspalette <- function(rp, brightness = 0.5) {
+#' @export
+setBrightness <- function(rp, brightness = 0.5) {
   rp$cols <- imgToPalette(rp$img, brightness)
   rp$palette <- grDevices::colorRampPalette(rp$cols)
   return(rp)
@@ -23,6 +24,8 @@ setBrightness.rijkspalette <- function(rp, brightness = 0.5) {
 #' @importFrom graphics plot
 #'
 #' @method plot rijkspalette
+#'
+#' @export
 plot.rijkspalette <- function(x, ...) {
   graphics::layout(matrix(c(1,1,1,2), 1))
   plot(x$img, axes = FALSE)
@@ -36,9 +39,12 @@ plot.rijkspalette <- function(x, ...) {
 #' Prints a rijkspalette object with nice colours in the console
 #'
 #' @param x rijkspalette object
+#' @param ... other arguments to print (not used)
 #'
 #' @method print rijkspalette
-print.rijkspalette <- function(x) {
+#'
+#' @export
+print.rijkspalette <- function(x, ...) {
   cat("\n  Rijkspalette based on", crayon::underline(x$call$query))
   st <- lapply(x$cols, crayon::make_style, bg = TRUE)
   cat("\n\n  ",

@@ -4,10 +4,12 @@
 \alias{print.rijkspalette}
 \title{Print rijkspalette}
 \usage{
-\method{print}{rijkspalette}(x)
+\method{print}{rijkspalette}(x, ...)
 }
 \arguments{
 \item{x}{rijkspalette object}
+
+\item{...}{other arguments to print (not used)}
 }
 \description{
 Prints a rijkspalette object with nice colours in the console
