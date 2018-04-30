@@ -1,16 +1,20 @@
 # rijkspalette
 
+[![Build Status](https://travis-ci.org/vankesteren/rijkspalette.svg?branch=master)](https://travis-ci.org/vankesteren/rijkspalette)
+
 An R package to generate palettes based on famous paintings from the Rijksmuseum. This package uses the fantastic [Rijksmuseum API](http://rijksmuseum.github.io/). 
 
 
-## installation
+# Installation
+
+Installation is simple when you have `R` and the package `devtools` installed:
 ```R
 devtools::install_github("vankesteren/rijkspalette")
 ```
 
-## usage
+## Usage
 
-Let's make a palette based on Vermeer's famous painting of a woman reading a letter.
+As an example, let's make a palette based on Vermeer's famous painting of a woman reading a letter.
 ```R
 library(rijkspalette)
 letter <- rijksPalette("Vermeer Letter")

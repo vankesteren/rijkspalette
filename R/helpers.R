@@ -30,7 +30,7 @@ getRGB <- function(im, pb) {
 prefix <- "https://www.rijksmuseum.nl/api/nl/collection?q="
 
 #' @keywords internal
-suffix <- "&type=schilderij&key=fpGQTuED&format=json"
+suffix <- "&type=schilderij&key=1nPNPlLc&format=json"
 
 #' Rijksquery
 #'
