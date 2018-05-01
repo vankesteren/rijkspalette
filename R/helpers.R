@@ -3,26 +3,49 @@
 #' Translates an image into a palette of 9 colours
 #'
 #' @param img cimg object from imager
+#' @param k how many colours
 #' @param lightness how light the returned palette should be
 #'
-#' @keywords internal
-imgToPalette <- function(img, lightness = 0.5) {
-  img512 <- imager::resize(img, 512, 512)
-  splitx <- imager::imsplit(img512,"x",-171)
-  blocks <- unlist(lapply(splitx, function(i) imager::imsplit(i,"y",-171)),
-                   recursive = FALSE)
-  fuzzies <- lapply(blocks, function(i) imager::isoblur(i, 10))
-  return(structure(vapply(fuzzies, getRGB, "", pb = lightness,
-                          USE.NAMES = FALSE),
-                   class = c("character", "rijkscols")))
-}
-
-#' @importFrom stats quantile
+#' @importFrom stats kmeans
 #'
 #' @keywords internal
-getRGB <- function(im, pb) {
-  medcols <- apply(im, 4, quantile, probs = pb)
-  return(grDevices::rgb(medcols[1], medcols[2], medcols[3]))
+imgToPalette <- function(img, k, brightness) {
+  # resize and convert to lab colour space
+  img512 <- imager::resize(img, 512, 512)
+  lab <- imager::RGBtoLab(img512)
+
+  # split into 961 pieces
+  splitx <- imager::imsplit(lab,"x",-17)
+  blocks <- unlist(lapply(splitx, function(i) imager::imsplit(i,"y",-17)),
+                   recursive = FALSE)
+  fuzzies <- lapply(blocks, function(i) imager::isoblur(i, 5))
+
+  # get a matrix of mean colours
+  labmat <- t(vapply(fuzzies, getMean, c(1.0,2.0,3.0), USE.NAMES = FALSE))
+
+  # create 5 clusters in the a*b* space
+  set.seed(142857)
+  clusters <- kmeans(labmat[,-1],k)$cluster
+  cluslist <- lapply(1:k, function(i) labmat[clusters == i,])
+
+  # get a colour from each cluster based on the input brightness
+  colours <- t(sapply(cluslist, function(m) {
+    m[order(m[,1])[round(nrow(m)*brightness)],]
+  }))
+
+  # convert back to rgb via cimg (quite convoluted but works)
+  labimg <- array(0, dim = c(1,k,1,3))
+  labimg[1,,1,] <- colours
+  rgbimg <- imager::LabtoRGB(labimg)
+
+  # return rgb colours
+  return(apply(rgbimg[1,,1,], 1, function(x) grDevices::rgb(x[1],x[2],x[3])))
+}
+
+
+#' @keywords internal
+getMean <- function(img) {
+  apply(img, 4, mean)
 }
 
 

@@ -1,13 +1,16 @@
-#' Set brightness for a rijkspalette
+#' Tune a rijksPalette
 #'
-#' Proper method stuff will be there soon.
+#' This function tunes the extracted palette from an image in a rijksPalette
+#' object. Often, the defaults need to be tuned a little to get the nicest
+#' results.
 #'
 #' @param rp rijkspalette object
-#' @param brightness between 0 (darkest) and 1 (brightest)
+#' @param brightness overall brightness between 0 (darkest) and 1 (brightest)
+#' @param k number of colours to extract
 #'
 #' @export
-setBrightness <- function(rp, brightness = 0.5) {
-  rp$cols <- imgToPalette(rp$img, brightness)
+tune <- function(rp, brightness = 0.7, k = 5) {
+  rp$cols <- imgToPalette(rp$img, k, brightness)
   rp$palette <- grDevices::colorRampPalette(rp$cols)
   return(rp)
 }
@@ -46,15 +49,7 @@ plot.rijkspalette <- function(x, ...) {
 #' @export
 print.rijkspalette <- function(x, ...) {
   cat("\n  Rijkspalette based on", crayon::underline(x$call$query))
-  st <- lapply(x$cols, crayon::make_style, bg = TRUE)
-  cat("\n\n  ",
-      st[[1]]("  "),
-      st[[2]]("  "),
-      st[[3]]("  "),
-      st[[4]]("  "),
-      st[[5]]("  "),
-      st[[6]]("  "),
-      st[[7]]("  "),
-      st[[8]]("  "),
-      st[[9]]("  "), "\n\n")
+  cat("\n\n  ")
+  lapply(x$cols, function(co) cat(crayon::make_style(co, bg = TRUE)("  "), ""))
+  cat("\n\n")
 }

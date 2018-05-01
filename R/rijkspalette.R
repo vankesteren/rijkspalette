@@ -14,7 +14,7 @@ rijksPalette <- function(query) {
   time <- Sys.time()
   downloadedImage <- rijksQuery(query)
   img <- imager::load.image(downloadedImage)
-  cols <- imgToPalette(img)
+  cols <- imgToPalette(img, 5, 0.7)
   return(structure(list(call = call,
                         time = time,
                         imageLocation = downloadedImage,

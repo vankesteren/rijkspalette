@@ -4,10 +4,12 @@
 \alias{imgToPalette}
 \title{Image to palette}
 \usage{
-imgToPalette(img, lightness = 0.5)
+imgToPalette(img, k, brightness)
 }
 \arguments{
 \item{img}{cimg object from imager}
+
+\item{k}{how many colours}
 
 \item{lightness}{how light the returned palette should be}
 }

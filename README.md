@@ -30,43 +30,48 @@ plot(letter)
 
 ![vermeer](img/vermeer.png)
 
-The palette still seems a bit dark. Luckily, we can select its brightness between 0 and 1! The default value is 0.5.
+The palette works well for the above image. However, when a painter uses many colours this does not always work well:
 
 ```R
-letter <- setBrightness(letter, 0.8)
-plot(letter)
+appel <- rijksPalette("Karel Appel")
+plot(appel)
 ```
-![brightvermeer](img/brightvermeer.png)
+![appel5](img/appel5.png)
 
-That's better. Now let's use the two most relevant items inside this object:
+Luckily, we can tune both the number of colours and the brightness of those colours:
 
 ```R
-letter$cols
+appel <- tune(appel, brightness = 0.8, k = 7)
+plot(appel)
 ```
+![appel5](img/appel7.png)
 
-The extracted colours in hexadecimal format
 
-```
-[1] "#CDCFC8" "#8E9595" "#101113" "#4D4B2C" "#5B6570" "#232722" "#454324" "#5D604D" "#3A3C38"
-attr(,"class")
-[1] "character" "rijkscols"
-```
+That's better. Now let's use the two most relevant items inside this object. First, the `cols` slot contains the extracted colours in hexadecimal format:
 
-And the palette object is a `colorRampPalette` function to be used in plots and such:
 ```R
-barplot(1:15, col = letter$palette(15))
+appel$cols
+```
+
+```
+[1] "#9C4734" "#C79734" "#29384D" "#C0C4B0" "#426C73" "#7A8D8B" "#155F7A"
+```
+
+And the `palette` object is a `colorRampPalette` function to be used in plots and such:
+
+```R
+barplot(1:15, col = appel$palette(15))
 ```
 
 ![barplot](img/barplot.png)
 
-This can become practically continuous:
-
+This can become practically continuous through interpolation:
 
 ```R
-barplot(rep(1,1500), col = letter$palette(1500), border = NA, space = 0, 
+barplot(rep(1,1500), col = appel$palette(1500), border = NA, space = 0, 
         axes = FALSE)
 ```
 
 ![contpal](img/contpal.png)
 
-
+Try it out yourself! Do post your palette on twitter with the `#rijkspalette` hashtag :)
