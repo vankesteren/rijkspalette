@@ -8,7 +8,7 @@
 #' @keywords internal
 imgToPalette <- function(img, lightness = 0.5) {
   img512 <- imager::resize(img, 512, 512)
-  splitx <- imager::imsplit(img,"x",-171)
+  splitx <- imager::imsplit(img512,"x",-171)
   blocks <- unlist(lapply(splitx, function(i) imager::imsplit(i,"y",-171)),
                    recursive = FALSE)
   fuzzies <- lapply(blocks, function(i) imager::isoblur(i, 10))
