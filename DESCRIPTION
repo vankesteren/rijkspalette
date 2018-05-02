@@ -1,7 +1,7 @@
 Package: rijkspalette
 Type: Package
 Title: Create Colour Palettes Based on Famous Artworks from the Rijksmuseum
-Version: 0.1.0
+Version: 0.2.0
 Author: Erik-Jan van Kesteren
 Maintainer: Erik-Jan van Kesteren <e.vankesteren1@uu.nl>
 Description: This package creates colour palettes based on paintings of famous
@@ -18,3 +18,4 @@ Imports: imager,
     grDevices,
     jsonlite
 RoxygenNote: 6.0.1
+Suggests: manipulate

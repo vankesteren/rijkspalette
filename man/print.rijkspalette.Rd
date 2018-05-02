@@ -14,3 +14,10 @@
 \description{
 Prints a rijkspalette object with nice colours in the console
 }
+\seealso{
+\code{\link{plot.rijkspalette}}
+
+\code{\link{tune}}
+
+\code{\link{explore}}
+}

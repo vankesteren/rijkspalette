@@ -5,8 +5,12 @@
 #'
 #' @param query Keyword to search for in the collection of the Rijksmuseum
 #'
+#' @return an object of type \code{rijkspalette}
 #'
-#' @return an object of type "rijkspalette"
+#' @seealso \code{\link{plot.rijkspalette}}
+#' @seealso \code{\link{tune}}
+#' @seealso \code{\link{explore}}
+#'
 #'
 #' @export
 rijksPalette <- function(query) {
@@ -14,11 +18,13 @@ rijksPalette <- function(query) {
   time <- Sys.time()
   downloadedImage <- rijksQuery(query)
   img <- imager::load.image(downloadedImage)
-  cols <- imgToPalette(img, 5, 0.7)
+  lm <- imgToLabmat(img)
+  cols <- labmatToPalette(lm, 5, 0.75)
   return(structure(list(call = call,
                         time = time,
                         imageLocation = downloadedImage,
                         img = img,
+                        labmat = lm,
                         cols = cols,
                         palette = grDevices::colorRampPalette(cols)),
                    class = "rijkspalette"))

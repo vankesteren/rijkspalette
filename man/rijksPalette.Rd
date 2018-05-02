@@ -10,9 +10,16 @@ rijksPalette(query)
 \item{query}{Keyword to search for in the collection of the Rijksmuseum}
 }
 \value{
-an object of type "rijkspalette"
+an object of type \code{rijkspalette}
 }
 \description{
 This function queries the Rijksmuseum collection for paintings and returns
 a colour palette based on colours from that painting.
+}
+\seealso{
+\code{\link{plot.rijkspalette}}
+
+\code{\link{tune}}
+
+\code{\link{explore}}
 }

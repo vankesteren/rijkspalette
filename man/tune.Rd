@@ -4,14 +4,16 @@
 \alias{tune}
 \title{Tune a rijksPalette}
 \usage{
-tune(rp, brightness = 0.7, k = 5)
+tune(x, lightness, k, ...)
 }
 \arguments{
-\item{rp}{rijkspalette object}
+\item{x}{rijkspalette object}
 
-\item{brightness}{overall brightness between 0 (darkest) and 1 (brightest)}
+\item{lightness}{overall lightness between 0 (darkest) and 1 (brightest)}
 
 \item{k}{number of colours to extract}
+
+\item{...}{other arguments passed to tune function (not used)}
 }
 \description{
 This function tunes the extracted palette from an image in a rijksPalette
