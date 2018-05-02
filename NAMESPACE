@@ -2,6 +2,7 @@
 
 S3method(explore,rijkspalette)
 S3method(plot,labmat)
+S3method(plot,rgbcols)
 S3method(plot,rijkspalette)
 S3method(print,rijkspalette)
 S3method(tune,rijkpalette)

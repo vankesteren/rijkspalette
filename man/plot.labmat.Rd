@@ -18,5 +18,7 @@ Plots a labmat object from a rijkspalette. It can be used for tuning the
 required number of clusters.
 }
 \seealso{
+\code{\link{plot.rgbcols}}
+
 \code{\link{explore}}
 }

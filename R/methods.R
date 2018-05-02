@@ -1,4 +1,4 @@
-#' Tune a rijksPalette
+#' Tune a rijkspalette
 #'
 #' This function tunes the extracted palette from an image in a rijksPalette
 #' object. Often, the defaults need to be tuned a little to get the nicest
@@ -14,6 +14,7 @@ tune <- function(x, lightness, k, ...) {
   UseMethod("tune")
 }
 
+#' @rdname tune
 #' @export
 tune.rijkpalette <- function(x, lightness = 0.75, k = 5, ...) {
   x$cols <- labmatToPalette(x$labmat, k, lightness)
@@ -66,14 +67,24 @@ print.rijkspalette <- function(x, ...) {
   cat("\n\n")
 }
 
-
+#' Plot rijkspalette colours
+#'
+#' Plots a cols object from a rijkspalette.
+#'
+#' @param x an rgbcols object
+#' @param ... other arguments passed to plot function
+#'
+#' @seealso \code{\link{plot.rijkspalette}}
+#'
+#' @method plot rgbcols
+#'
+#' @export
 plot.rgbcols <- function(x, ...) {
   opt <- par(mar = c(1,1,1,1))
   barplot(rep(1, length(x)), space = 0, col = x, border = NA,
           axes = FALSE, asp = 1, ...)
   par(opt)
 }
-
 
 #' Plot labmat
 #'
@@ -86,6 +97,7 @@ plot.rgbcols <- function(x, ...) {
 #' @param k number of clusters to draw
 #' @param ... other arguments passed to plot function
 #'
+#' @seealso \code{\link{plot.rgbcols}}
 #' @seealso \code{\link{explore}}
 #'
 #' @method plot labmat

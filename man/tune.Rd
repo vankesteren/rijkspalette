@@ -2,9 +2,12 @@
 % Please edit documentation in R/methods.R
 \name{tune}
 \alias{tune}
-\title{Tune a rijksPalette}
+\alias{tune.rijkpalette}
+\title{Tune a rijkspalette}
 \usage{
 tune(x, lightness, k, ...)
+
+\method{tune}{rijkpalette}(x, lightness = 0.75, k = 5, ...)
 }
 \arguments{
 \item{x}{rijkspalette object}
