@@ -1,8 +1,14 @@
+#' @exportMethod tune explore
+#'
+NULL
+
 #' Tune a rijkspalette
 #'
 #' This function tunes the extracted palette from an image in a rijksPalette
 #' object. Often, the defaults need to be tuned a little to get the nicest
 #' results.
+#'
+#' @title tune
 #'
 #' @param x rijkspalette object
 #' @param lightness overall lightness between 0 (darkest) and 1 (brightest)
@@ -16,11 +22,43 @@ tune <- function(x, lightness, k, ...) {
 
 #' @rdname tune
 #' @export
-tune.rijkpalette <- function(x, lightness = 0.75, k = 5, ...) {
+tune.rijkspalette <- function(x, lightness = 0.75, k = 5, ...) {
   x$cols <- labmatToPalette(x$labmat, k, lightness)
   x$palette <- grDevices::colorRampPalette(x$cols)
   return(x)
 }
+
+#' Explore the available colours in a rijkspalette
+#'
+#' This function plots the available colours in ab-space along with the chosen
+#' cluster centroids. By manipulating the number of clusters, each distinct
+#' colour category can receive its own centroid. This function was tested to
+#' works in RStudio. The package \code{manipulate} is required for its function.
+#'
+#' @title explore
+#'
+#' @param x A rijkspalette object
+#' @param ... other arguments passed to plot function
+#'
+#' @export
+explore <- function(x, ...) {
+  UseMethod("explore")
+}
+
+#' @rdname explore
+#' @export
+explore.rijkspalette <- function(x, ...) {
+  if (requireNamespace("manipulate", quietly = TRUE)) {
+    manipulate::manipulate(plot(x$labmat, k, ...),
+                           k = manipulate::slider(1, 15, 5,
+                                                  label = "Number of clusters"))
+  } else {
+    warning("Package manipulate is not installed.",
+            "For full exploration functionality, install it.")
+    plot(x$labmat, ...)
+  }
+}
+
 
 
 #' Plot rijkspalette
@@ -122,33 +160,3 @@ plot.labmat <- function(x, k = 5, ...) {
   par(opt)
 }
 
-#' Explore the available colours in a rijkspalette
-#'
-#' This function plots the available colours in ab-space along with the chosen
-#' cluster centroids. By manipulating the number of clusters, each distinct
-#' colour category can receive its own centroid. This function was tested to
-#' works in RStudio. The package `manipulate` is required for its function.
-#'
-#' @param x A rijkspalette object
-#' @param ... other arguments passed to plot function
-#'
-#' @method explore rijkspalette
-#'
-#' @export
-explore <- function(x, ...) {
-  UseMethod("explore")
-}
-
-#' @rdname explore
-#' @export
-explore.rijkspalette <- function(x, ...) {
-  if (requireNamespace("manipulate", quietly = TRUE)) {
-    manipulate::manipulate(plot(x$labmat, k = 5, ...),
-                           k = manipulate::slider(1, 15, 5,
-                                                  label = "Number of clusters"))
-  } else {
-    warning("Package manipulate is not installed.",
-            "For full exploration functionality, install it.")
-    plot(x$labmat, ...)
-  }
-}

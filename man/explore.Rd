@@ -3,9 +3,9 @@
 \name{explore}
 \alias{explore}
 \alias{explore.rijkspalette}
-\title{Explore the available colours in a rijkspalette}
+\title{explore}
 \usage{
-\method{explore}{rijkspalette}(x, ...)
+explore(x, ...)
 
 \method{explore}{rijkspalette}(x, ...)
 }
@@ -15,8 +15,11 @@
 \item{...}{other arguments passed to plot function}
 }
 \description{
+Explore the available colours in a rijkspalette
+}
+\details{
 This function plots the available colours in ab-space along with the chosen
 cluster centroids. By manipulating the number of clusters, each distinct
 colour category can receive its own centroid. This function was tested to
-works in RStudio. The package `manipulate` is required for its function.
+works in RStudio. The package \code{manipulate} is required for its function.
 }
