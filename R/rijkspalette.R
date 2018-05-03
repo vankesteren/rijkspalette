@@ -7,10 +7,13 @@
 #'
 #' @return an object of type \code{rijkspalette}
 #'
-#' @seealso \code{\link{plot.rijkspalette}}
+#' @examples
+#' mm <- rijksPalette("Vermeer Letter")
+#' plot(mm)
+#' barplot(sqrt(1:15), col = mm$palette(15))
+#'
 #' @seealso \code{\link{tune}}
 #' @seealso \code{\link{explore}}
-#'
 #'
 #' @export
 rijksPalette <- function(query) {

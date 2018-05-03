@@ -20,7 +20,6 @@ tune <- function(x, lightness, k, ...) {
   UseMethod("tune")
 }
 
-#' @rdname tune
 #' @export
 tune.rijkspalette <- function(x, lightness = 0.75, k = 5, ...) {
   x$cols <- labmatToPalette(x$labmat, k, lightness)
@@ -45,7 +44,6 @@ explore <- function(x, ...) {
   UseMethod("explore")
 }
 
-#' @rdname explore
 #' @export
 explore.rijkspalette <- function(x, ...) {
   if (requireNamespace("manipulate", quietly = TRUE)) {
@@ -62,13 +60,6 @@ explore.rijkspalette <- function(x, ...) {
 # R CMD CHECK fix for above function
 globalVariables("k")
 
-#' Plot rijkspalette
-#'
-#' Plots a rijkspalette with its source image
-#'
-#' @param x rijkspalette object
-#' @param ... other arguments passed to plot function
-#'
 #' @importFrom graphics barplot
 #' @importFrom graphics plot
 #'
@@ -85,17 +76,7 @@ plot.rijkspalette <- function(x, ...) {
   par(opt)
 }
 
-#' Print rijkspalette
-#'
-#' Prints a rijkspalette object with nice colours in the console
-#'
-#' @param x rijkspalette object
-#' @param ... other arguments to print (not used)
-#'
-#' @seealso \code{\link{plot.rijkspalette}}
-#' @seealso \code{\link{tune}}
-#' @seealso \code{\link{explore}}
-#'
+
 #' @method print rijkspalette
 #'
 #' @export
@@ -106,15 +87,6 @@ print.rijkspalette <- function(x, ...) {
   cat("\n\n")
 }
 
-#' Plot rijkspalette colours
-#'
-#' Plots a cols object from a rijkspalette.
-#'
-#' @param x an rgbcols object
-#' @param ... other arguments passed to plot function
-#'
-#' @seealso \code{\link{plot.rijkspalette}}
-#'
 #' @method plot rgbcols
 #'
 #' @export
@@ -125,19 +97,8 @@ plot.rgbcols <- function(x, ...) {
   par(opt)
 }
 
-#' Plot labmat
-#'
-#' Plots a labmat object from a rijkspalette. It can be used for tuning the
-#' required number of clusters.
-#'
+
 #' @importFrom graphics par points
-#'
-#' @param x a labmat object
-#' @param k number of clusters to draw
-#' @param ... other arguments passed to plot function
-#'
-#' @seealso \code{\link{plot.rgbcols}}
-#' @seealso \code{\link{explore}}
 #'
 #' @method plot labmat
 #'

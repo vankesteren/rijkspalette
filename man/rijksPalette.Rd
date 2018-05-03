@@ -16,9 +16,13 @@ an object of type \code{rijkspalette}
 This function queries the Rijksmuseum collection for paintings and returns
 a colour palette based on colours from that painting.
 }
-\seealso{
-\code{\link{plot.rijkspalette}}
+\examples{
+mm <- rijksPalette("Vermeer Letter")
+plot(mm)
+barplot(sqrt(1:15), col = mm$palette(15))
 
+}
+\seealso{
 \code{\link{tune}}
 
 \code{\link{explore}}

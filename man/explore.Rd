@@ -2,12 +2,9 @@
 % Please edit documentation in R/methods.R
 \name{explore}
 \alias{explore}
-\alias{explore.rijkspalette}
 \title{explore}
 \usage{
 explore(x, ...)
-
-\method{explore}{rijkspalette}(x, ...)
 }
 \arguments{
 \item{x}{A rijkspalette object}

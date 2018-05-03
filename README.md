@@ -1,28 +1,36 @@
-# rijkspalette
+<p align="center">
+  <img src="img/header.png" width="450px"></img>
+  <p align="center">
+    <a href="https://travis-ci.org/vankesteren/rijkspalette"><img src="https://travis-ci.org/vankesteren/rijkspalette.svg?branch=master"></a>
+    <!-- <a href="https://cran.r-project.org/package=Massign"><img src="http://www.r-pkg.org/badges/version/Massign"></a>
+    <a href="https://cran.r-project.org/package=Massign"><img src="https://cranlogs.r-pkg.org/badges/grand-total/Massign?color=1199aa"></a> -->
+  </p>
+</p>
 
-[![Build Status](https://travis-ci.org/vankesteren/rijkspalette.svg?branch=master)](https://travis-ci.org/vankesteren/rijkspalette)
 
-An R package to generate palettes based on famous paintings from the Rijksmuseum. This package uses the fantastic [Rijksmuseum API](http://rijksmuseum.github.io/). 
+### What is this
+An R package to generate palettes based on famous paintings from the Rijksmuseum, using the fantastic [Rijksmuseum API](http://rijksmuseum.github.io/).
 
 
-# Installation
-
-Installation is simple when you have `R` and the package `devtools` installed:
+Install the development version like this:
 ```R
 devtools::install_github("vankesteren/rijkspalette")
 ```
 
-## Usage
+### How to use
 
-As an example, let's make a palette based on Vermeer's famous painting of a woman reading a letter.
+Let's make a barplot using a palette based on [Vermeer's famous painting of a woman reading a letter](https://www.rijksmuseum.nl/en/search/objects?q=vermeer+letter&p=1&ps=12&st=Objects&ii=0#/SK-C-251,0). The `rijksPalette()` function queries the collection of paintings of the [Rijksmuseum in Amsterdam](https://www.rijksmuseum.nl).
 ```R
 library(rijkspalette)
 letter <- rijksPalette("Vermeer Letter")
 letter
 ```
+
+A 16-bit impression of the palette is shown in the `R` console.
+
 ![console](img/console.png)
 
-The colours show up immediately in the `R` console, but not very precisely because it only accepts 256 colours. Maybe we should look at the palette a bit better:
+Let's look at the palette a bit better:
 
 ```R
 plot(letter)
@@ -30,48 +38,76 @@ plot(letter)
 
 ![vermeer](img/vermeer.png)
 
-The palette works well for the above image. However, when a painter uses many colours this does not always work well:
+Now we can make a plot using the palette from these colours.
 
 ```R
-appel <- rijksPalette("Karel Appel")
-plot(appel)
+barplot(iris$Sepal.Length,
+        col = letter$palette(3)[iris$Species],
+        border = NA, space = 0,
+        main = "Sepal length of 3 iris species")
+```
+![iris](img/iris.png)
+
+Note that the `palette()` function performs interpolation: you can generate any number of colours!
+```R
+barplot(rep(1, 1500),
+        col = letter$palette(1500),
+        border = NA, space = 0,
+        axes = FALSE, asp = 1)
+```
+![continuous](img/continuous.png)
+
+
+__Try it out for yourself! Post your palette on twitter with the `#rijkspalette` hashtag :thumbsup:__
+
+<br/>
+
+![spacer](img/spacer.png)
+<br>
+
+### Details: tuning, exploring, and clustering
+The palette works well for the above image. However, when a painter uses many colours, some prominent colours may be skipped:
+
+```R
+appel5 <- rijksPalette("Karel Appel")
+plot(appel5)
 ```
 ![appel5](img/appel5.png)
 
-Luckily, we can tune both the number of colours and the brightness of those colours:
+Here, the quite prominent red colour is skipped. Luckily, we can tune both the number of colours and the brightness of those colours:
 
 ```R
-appel <- tune(appel, brightness = 0.8, k = 7)
-plot(appel)
+appel7 <- tune(appel5, brightness = 0.85, k = 7)
+plot(appel7)
 ```
 ![appel5](img/appel7.png)
 
 
-That's better. Now let's use the two most relevant items inside this object. First, the `cols` slot contains the extracted colours in hexadecimal format:
+That's better. But why? The `explore()` function can give us more detail:
+
+```R
+explore(appel)
+```
+![explore](img/explore.png)
+
+Here, we see the colours in the image plotted on the [`a*b*` space](https://en.wikipedia.org/w/index.php?title=Lab_color_space&oldid=830722208). The white squares are the cluster centroids used to generate the palette. Note that the two quite distinct arms in the top of the plot belong to the same cluster. By increasing the number of clusters (the number of colours in the palette), we can fix this issue:
+
+![explore7](img/explore7.png)
+
+The better coverage of the colour space indicates that 7 clusters is better than 5. The `k` argument in the `tune()` function takes care of that.
+
+To access the individual colours, use the `cols` slot:
 
 ```R
 appel$cols
+
+[1] "#A8402D" "#969D4C" "#B5BDAC" "#7D817A" "#336D7F" "#235B6D" "#303344"
 ```
 
-```
-[1] "#9C4734" "#C79734" "#29384D" "#C0C4B0" "#426C73" "#7A8D8B" "#155F7A"
-```
-
-And the `palette` object is a `colorRampPalette` function to be used in plots and such:
+As before, the `palette` slot is a `colorRampPalette` function to be used in plots:
 
 ```R
-barplot(1:15, col = appel$palette(15))
+barplot(1/sqrt(1:15), col = appel$palette(15))
 ```
 
 ![barplot](img/barplot.png)
-
-This can become practically continuous through interpolation:
-
-```R
-barplot(rep(1,1500), col = appel$palette(1500), border = NA, space = 0, 
-        axes = FALSE)
-```
-
-![contpal](img/contpal.png)
-
-Try it out yourself! Do post your palette on twitter with the `#rijkspalette` hashtag :)

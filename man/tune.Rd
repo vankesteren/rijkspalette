@@ -2,12 +2,9 @@
 % Please edit documentation in R/methods.R
 \name{tune}
 \alias{tune}
-\alias{tune.rijkspalette}
 \title{tune}
 \usage{
 tune(x, lightness, k, ...)
-
-\method{tune}{rijkspalette}(x, lightness = 0.75, k = 5, ...)
 }
 \arguments{
 \item{x}{rijkspalette object}
