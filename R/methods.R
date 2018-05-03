@@ -59,7 +59,8 @@ explore.rijkspalette <- function(x, ...) {
   }
 }
 
-
+# R CMD CHECK fix for above function
+globalVariables("k")
 
 #' Plot rijkspalette
 #'
