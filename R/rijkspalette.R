@@ -21,13 +21,13 @@ rijksPalette <- function(query) {
   time <- Sys.time()
   downloadedImage <- rijksQuery(query)
   img <- imager::load.image(downloadedImage)
-  lm <- imgToLabmat(img)
-  cols <- labmatToPalette(lm, 5, 0.75)
+  labmat <- imgToLabmat(img)
+  cols <- labmatToPalette(labmat, 5, 0.75)
   return(structure(list(call = call,
                         time = time,
                         imageLocation = downloadedImage,
                         img = img,
-                        labmat = lm,
+                        labmat = labmat,
                         cols = cols,
                         palette = grDevices::colorRampPalette(cols)),
                    class = "rijkspalette"))

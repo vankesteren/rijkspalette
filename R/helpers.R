@@ -46,7 +46,7 @@ labmatToPalette <- function(labmat, k, lightness) {
 
   # get a colour from each cluster based on the input lightness
   colours <- t(sapply(cluslist, function(m) {
-    m[order(m[,1])[round(nrow(m)*lightness)],]
+    m[order(m[,1])[ceiling(nrow(m)*lightness)],]
   }))
 
   # convert back to rgb via cimg (quite convoluted but works well)
@@ -77,6 +77,7 @@ suffix <- "&type=schilderij&key=1nPNPlLc&format=json"
 #' @keywords internal
 rijksQuery <- function(query) {
   result <- jsonlite::fromJSON(paste0(prefix, utils::URLencode(query), suffix))
+  if (length(result$artObjects) == 0) stop("Query returned no results")
   images <- result$artObjects[result$artObjects$hasImage,]
   if (nrow(images) == 0) stop("Query returned no results")
   imgurl <- paste0(images[1,]$webImage$url, "=s512")

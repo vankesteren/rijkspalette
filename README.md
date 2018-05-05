@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="img/header.png" width="450px"></img>
+  <img src="./img/header.png" width="450px"></img>
   <p align="center">
     <a href="https://travis-ci.org/vankesteren/rijkspalette"><img src="https://travis-ci.org/vankesteren/rijkspalette.svg?branch=master"></a>
-    <!-- <a href="https://cran.r-project.org/package=Massign"><img src="http://www.r-pkg.org/badges/version/Massign"></a>
-    <a href="https://cran.r-project.org/package=Massign"><img src="https://cranlogs.r-pkg.org/badges/grand-total/Massign?color=1199aa"></a> -->
+    <a href="https://cran.r-project.org/package=rijkspalette"><img src="http://www.r-pkg.org/badges/version/rijkspalette"></a>
+    <a href="https://cran.r-project.org/package=rijkspalette"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rijkspalette?color=1199aa"></a>
   </p>
 </p>
 
@@ -27,7 +27,7 @@ letter
 
 A 16-bit impression of the palette is shown in the `R` console.
 
-![console](img/console.png)
+![console](./img/console.png)
 
 Let's look at the palette a bit better:
 
@@ -35,7 +35,7 @@ Let's look at the palette a bit better:
 plot(letter)
 ```
 
-![vermeer](img/vermeer.png)
+![vermeer](./img/vermeer.png)
 
 Now we can make a plot using the palette from these colours.
 
@@ -45,7 +45,7 @@ barplot(iris$Sepal.Length,
         border = NA, space = 0,
         main = "Sepal length of 3 iris species")
 ```
-![iris](img/iris.png)
+![iris](./img/iris.png)
 
 Note that the `palette()` function performs interpolation: you can generate any number of colours!
 ```R
@@ -54,14 +54,14 @@ barplot(rep(1, 1500),
         border = NA, space = 0,
         axes = FALSE, asp = 1)
 ```
-![continuous](img/continuous.png)
+![continuous](./img/continuous.png)
 
 
 __Try it out for yourself! Post your palette on twitter with the `#rijkspalette` hashtag :thumbsup:__
 
 <br/>
 
-![spacer](img/spacer.png)
+![spacer](./img/spacer.png)
 <br>
 
 ### Details: tuning, exploring, and clustering
@@ -71,7 +71,7 @@ The palette works well for the above image. However, when a painter uses many co
 appel5 <- rijksPalette("Karel Appel")
 plot(appel5)
 ```
-![appel5](img/appel5.png)
+![appel5](./img/appel5.png)
 
 Here, the quite prominent red colour is skipped. Luckily, we can tune both the number of colours and the brightness of those colours:
 
@@ -79,7 +79,7 @@ Here, the quite prominent red colour is skipped. Luckily, we can tune both the n
 appel7 <- tune(appel5, brightness = 0.85, k = 7)
 plot(appel7)
 ```
-![appel5](img/appel7.png)
+![appel5](./img/appel7.png)
 
 
 That's better. But why? The `explore()` function can give us more detail:
@@ -87,11 +87,11 @@ That's better. But why? The `explore()` function can give us more detail:
 ```R
 explore(appel)
 ```
-![explore](img/explore.png)
+![explore](./img/explore.png)
 
 Here, we see the colours in the image plotted on the [`a*b*` space](https://en.wikipedia.org/w/index.php?title=Lab_color_space&oldid=830722208). The white squares are the cluster centroids used to generate the palette. Note that the two quite distinct arms in the top of the plot belong to the same cluster. By increasing the number of clusters (the number of colours in the palette), we can fix this issue:
 
-![explore7](img/explore7.png)
+![explore7](./img/explore7.png)
 
 The better coverage of the colour space indicates that 7 clusters is better than 5. The `k` argument in the `tune()` function takes care of that.
 
@@ -109,4 +109,4 @@ As before, the `palette` slot is a `colorRampPalette` function to be used in plo
 barplot(1/sqrt(1:15), col = appel$palette(15))
 ```
 
-![barplot](img/barplot.png)
+![barplot](./img/barplot.png)

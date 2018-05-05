@@ -13,6 +13,7 @@ NULL
 #' @param k number of colours to extract
 #'
 #' @seealso \code{\link{explore}}
+#' @seealso \code{\link{rijksPalette}}
 #'
 #' @export
 tune <- function(x, lightness, k) {
@@ -21,6 +22,8 @@ tune <- function(x, lightness, k) {
 
 #' @export
 tune.rijkspalette <- function(x, lightness = 0.75, k = 5) {
+  if (k < 2 || k > 25) stop("Input k between 2 and 25")
+  if (lightness <= 0 || lightness > 1) stop("Input lightness in range [0, 1)")
   x$cols <- labmatToPalette(x$labmat, k, lightness)
   x$palette <- grDevices::colorRampPalette(x$cols)
   return(x)
@@ -35,6 +38,9 @@ tune.rijkspalette <- function(x, lightness = 0.75, k = 5) {
 #'
 #' @param x A rijkspalette object
 #' @param ... other arguments passed to plot function
+#'
+#' @seealso \code{\link{tune}}
+#' @seealso \code{\link{rijksPalette}}
 #'
 #' @export
 explore <- function(x, ...) {

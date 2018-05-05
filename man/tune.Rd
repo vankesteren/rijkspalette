@@ -20,4 +20,6 @@ results.
 }
 \seealso{
 \code{\link{explore}}
+
+\code{\link{rijksPalette}}
 }

@@ -62,11 +62,11 @@
   <div class="contents col-md-9">
     
 <p align="center">
-  <img src="img/header.png" width="450px"></p>
+  <img src="./img/header.png" width="450px"></p>
 <p align="center">
     <a href="https://travis-ci.org/vankesteren/rijkspalette"><img src="https://travis-ci.org/vankesteren/rijkspalette.svg?branch=master"></a>
-    <!-- <a href="https://cran.r-project.org/package=Massign"><img src="http://www.r-pkg.org/badges/version/Massign"></a>
-    <a href="https://cran.r-project.org/package=Massign"><img src="https://cranlogs.r-pkg.org/badges/grand-total/Massign?color=1199aa"></a> -->
+    <a href="https://cran.r-project.org/package=rijkspalette"><img src="http://www.r-pkg.org/badges/version/rijkspalette"></a>
+    <a href="https://cran.r-project.org/package=rijkspalette"><img src="https://cranlogs.r-pkg.org/badges/grand-total/rijkspalette?color=1199aa"></a>
   </p>
 
 <div id="what-is-this" class="section level3">
@@ -84,25 +84,25 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 letter &lt;-<span class="st"> </span><span class="kw"><a href="reference/rijksPalette.html">rijksPalette</a></span>(<span class="st">"Vermeer Letter"</span>)
 letter</code></pre></div>
 <p>A 16-bit impression of the palette is shown in the <code>R</code> console.</p>
-<p><img src="img/console.png" alt="console"></p>
+<p><img src="./img/console.png" alt="console"></p>
 <p>Let’s look at the palette a bit better:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(letter)</code></pre></div>
-<p><img src="img/vermeer.png" alt="vermeer"></p>
+<p><img src="./img/vermeer.png" alt="vermeer"></p>
 <p>Now we can make a plot using the palette from these colours.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(iris<span class="op">$</span>Sepal.Length,
         <span class="dt">col =</span> letter<span class="op">$</span><span class="kw">palette</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species],
         <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">space =</span> <span class="dv">0</span>,
         <span class="dt">main =</span> <span class="st">"Sepal length of 3 iris species"</span>)</code></pre></div>
-<p><img src="img/iris.png" alt="iris"></p>
+<p><img src="./img/iris.png" alt="iris"></p>
 <p>Note that the <code>palette()</code> function performs interpolation: you can generate any number of colours!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">1500</span>),
         <span class="dt">col =</span> letter<span class="op">$</span><span class="kw">palette</span>(<span class="dv">1500</span>),
         <span class="dt">border =</span> <span class="ot">NA</span>, <span class="dt">space =</span> <span class="dv">0</span>,
         <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="img/continuous.png" alt="continuous"></p>
+<p><img src="./img/continuous.png" alt="continuous"></p>
 <p><strong>Try it out for yourself! Post your palette on twitter with the <code>#rijkspalette</code> hashtag 👍</strong></p>
 <p><br></p>
-<p><img src="img/spacer.png" alt="spacer"><br></p>
+<p><img src="./img/spacer.png" alt="spacer"><br></p>
 </div>
 <div id="details-tuning-exploring-and-clustering" class="section level3">
 <h3 class="hasAnchor">
@@ -110,16 +110,16 @@ letter</code></pre></div>
 <p>The palette works well for the above image. However, when a painter uses many colours, some prominent colours may be skipped:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">appel5 &lt;-<span class="st"> </span><span class="kw"><a href="reference/rijksPalette.html">rijksPalette</a></span>(<span class="st">"Karel Appel"</span>)
 <span class="kw">plot</span>(appel5)</code></pre></div>
-<p><img src="img/appel5.png" alt="appel5"></p>
+<p><img src="./img/appel5.png" alt="appel5"></p>
 <p>Here, the quite prominent red colour is skipped. Luckily, we can tune both the number of colours and the brightness of those colours:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">appel7 &lt;-<span class="st"> </span><span class="kw"><a href="reference/tune.html">tune</a></span>(appel5, <span class="dt">brightness =</span> <span class="fl">0.85</span>, <span class="dt">k =</span> <span class="dv">7</span>)
 <span class="kw">plot</span>(appel7)</code></pre></div>
-<p><img src="img/appel7.png" alt="appel5"></p>
+<p><img src="./img/appel7.png" alt="appel5"></p>
 <p>That’s better. But why? The <code><a href="reference/explore.html">explore()</a></code> function can give us more detail:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/explore.html">explore</a></span>(appel)</code></pre></div>
-<p><img src="img/explore.png" alt="explore"></p>
+<p><img src="./img/explore.png" alt="explore"></p>
 <p>Here, we see the colours in the image plotted on the <a href="https://en.wikipedia.org/w/index.php?title=Lab_color_space&amp;oldid=830722208"><code>a*b*</code> space</a>. The white squares are the cluster centroids used to generate the palette. Note that the two quite distinct arms in the top of the plot belong to the same cluster. By increasing the number of clusters (the number of colours in the palette), we can fix this issue:</p>
-<p><img src="img/explore7.png" alt="explore7"></p>
+<p><img src="./img/explore7.png" alt="explore7"></p>
 <p>The better coverage of the colour space indicates that 7 clusters is better than 5. The <code>k</code> argument in the <code><a href="reference/tune.html">tune()</a></code> function takes care of that.</p>
 <p>To access the individual colours, use the <code>cols</code> slot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">appel<span class="op">$</span>cols
@@ -127,7 +127,7 @@ letter</code></pre></div>
 [<span class="dv">1</span>] <span class="st">"#A8402D"</span> <span class="st">"#969D4C"</span> <span class="st">"#B5BDAC"</span> <span class="st">"#7D817A"</span> <span class="st">"#336D7F"</span> <span class="st">"#235B6D"</span> <span class="st">"#303344"</span></code></pre></div>
 <p>As before, the <code>palette</code> slot is a <code>colorRampPalette</code> function to be used in plots:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="dt">col =</span> appel<span class="op">$</span><span class="kw">palette</span>(<span class="dv">15</span>))</code></pre></div>
-<p><img src="img/barplot.png" alt="barplot"></p>
+<p><img src="./img/barplot.png" alt="barplot"></p>
 </div>
 
   </div>

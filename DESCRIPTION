@@ -1,7 +1,7 @@
 Package: rijkspalette
 Type: Package
 Title: Create Colour Palettes Based on Famous Artworks from the Rijksmuseum
-Version: 0.2.0
+Version: 1.0.0
 Authors@R: 
     person(given = "Erik-Jan",
            family = "van Kesteren",

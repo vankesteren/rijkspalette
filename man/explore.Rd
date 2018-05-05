@@ -17,3 +17,8 @@ centroids used to generate the palette. By manipulating the number of
 clusters, each distinct colour category can receive its own centroid. This
 function was designed to work in \code{RStudio}.
 }
+\seealso{
+\code{\link{tune}}
+
+\code{\link{rijksPalette}}
+}
