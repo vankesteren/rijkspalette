@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{explore}
 \alias{explore}
-\title{explore}
+\title{Explore a rijkspalette}
 \usage{
 explore(x, ...)
 }
@@ -12,11 +12,8 @@ explore(x, ...)
 \item{...}{other arguments passed to plot function}
 }
 \description{
-Explore the available colours in a rijkspalette
-}
-\details{
-This function plots the available colours in ab-space along with the chosen
-cluster centroids. By manipulating the number of clusters, each distinct
-colour category can receive its own centroid. This function was tested to
-works in RStudio. The package \code{manipulate} is required for its function.
+This function plots the available colours in ab-space along with the cluster
+centroids used to generate the palette. By manipulating the number of
+clusters, each distinct colour category can receive its own centroid. This
+function was designed to work in \code{RStudio}.
 }

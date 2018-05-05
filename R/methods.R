@@ -2,39 +2,36 @@
 #'
 NULL
 
-#' Tune a rijkspalette
+#' @title Tune a rijkspalette
 #'
-#' This function tunes the extracted palette from an image in a rijksPalette
+#' @description This function tunes the extracted palette from an image in a rijksPalette
 #' object. Often, the defaults need to be tuned a little to get the nicest
 #' results.
-#'
-#' @title tune
 #'
 #' @param x rijkspalette object
 #' @param lightness overall lightness between 0 (darkest) and 1 (brightest)
 #' @param k number of colours to extract
-#' @param ... other arguments passed to tune function (not used)
+#'
+#' @seealso \code{\link{explore}}
 #'
 #' @export
-tune <- function(x, lightness, k, ...) {
+tune <- function(x, lightness, k) {
   UseMethod("tune")
 }
 
 #' @export
-tune.rijkspalette <- function(x, lightness = 0.75, k = 5, ...) {
+tune.rijkspalette <- function(x, lightness = 0.75, k = 5) {
   x$cols <- labmatToPalette(x$labmat, k, lightness)
   x$palette <- grDevices::colorRampPalette(x$cols)
   return(x)
 }
 
-#' Explore the available colours in a rijkspalette
+#' @title Explore a rijkspalette
 #'
-#' This function plots the available colours in ab-space along with the chosen
-#' cluster centroids. By manipulating the number of clusters, each distinct
-#' colour category can receive its own centroid. This function was tested to
-#' works in RStudio. The package \code{manipulate} is required for its function.
-#'
-#' @title explore
+#' @description This function plots the available colours in ab-space along with the cluster
+#' centroids used to generate the palette. By manipulating the number of
+#' clusters, each distinct colour category can receive its own centroid. This
+#' function was designed to work in \code{RStudio}.
 #'
 #' @param x A rijkspalette object
 #' @param ... other arguments passed to plot function

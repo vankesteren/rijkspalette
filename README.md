@@ -11,9 +11,8 @@
 ### What is this
 An R package to generate palettes based on famous paintings from the Rijksmuseum, using the fantastic [Rijksmuseum API](http://rijksmuseum.github.io/).
 
-
-Install the development version like this:
 ```R
+# Install the development version:
 devtools::install_github("vankesteren/rijkspalette")
 ```
 

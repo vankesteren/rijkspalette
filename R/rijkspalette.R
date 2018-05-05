@@ -8,9 +8,9 @@
 #' @return an object of type \code{rijkspalette}
 #'
 #' @examples
-#' mm <- rijksPalette("Vermeer Letter")
-#' plot(mm)
-#' barplot(sqrt(1:15), col = mm$palette(15))
+#' pal <- rijksPalette("Vermeer Letter")
+#' plot(pal)
+#' barplot(1/sqrt(1:15), col = pal$palette(15))
 #'
 #' @seealso \code{\link{tune}}
 #' @seealso \code{\link{explore}}

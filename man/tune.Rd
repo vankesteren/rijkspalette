@@ -2,9 +2,9 @@
 % Please edit documentation in R/methods.R
 \name{tune}
 \alias{tune}
-\title{tune}
+\title{Tune a rijkspalette}
 \usage{
-tune(x, lightness, k, ...)
+tune(x, lightness, k)
 }
 \arguments{
 \item{x}{rijkspalette object}
@@ -12,14 +12,12 @@ tune(x, lightness, k, ...)
 \item{lightness}{overall lightness between 0 (darkest) and 1 (brightest)}
 
 \item{k}{number of colours to extract}
-
-\item{...}{other arguments passed to tune function (not used)}
 }
 \description{
-Tune a rijkspalette
-}
-\details{
 This function tunes the extracted palette from an image in a rijksPalette
 object. Often, the defaults need to be tuned a little to get the nicest
 results.
+}
+\seealso{
+\code{\link{explore}}
 }

@@ -17,9 +17,9 @@ This function queries the Rijksmuseum collection for paintings and returns
 a colour palette based on colours from that painting.
 }
 \examples{
-mm <- rijksPalette("Vermeer Letter")
-plot(mm)
-barplot(sqrt(1:15), col = mm$palette(15))
+pal <- rijksPalette("Vermeer Letter")
+plot(pal)
+barplot(1/sqrt(1:15), col = pal$palette(15))
 
 }
 \seealso{

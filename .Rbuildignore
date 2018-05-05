@@ -2,4 +2,5 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 LICENSE
-^img/.*$
+img
+docs
