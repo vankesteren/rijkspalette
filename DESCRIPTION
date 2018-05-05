@@ -8,11 +8,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "e.vankesteren1@uu.nl")
 Maintainer: Erik-Jan van Kesteren <e.vankesteren1@uu.nl>
-Description: This package creates colour palettes based on paintings of famous
-    artists. Using the function rijksPalette(), you can search for and 
-    automatically generate a colour palette from any painting in the collection
-    of the Dutch Rijksmuseum. This package was developed using the fantastic 
-    Rijksmuseum API.
+Description: Create colour palettes based on famous paintings. Using the 
+    function rijksPalette(), you can search for any painting in the collection
+    of the Dutch Rijksmuseum and generate a colour palette from it. This package 
+    was developed using the fantastic Rijksmuseum API.
 License: MIT + file LICENCE
 URL: https://vankesteren.github.io/rijkspalette
 BugReports: https://github.com/vankesteren/rijkspalette/issues
