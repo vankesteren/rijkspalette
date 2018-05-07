@@ -11,7 +11,8 @@ Maintainer: Erik-Jan van Kesteren <e.vankesteren1@uu.nl>
 Description: Create colour palettes based on famous paintings. Using the 
     function rijksPalette(), you can search for any painting in the collection
     of the Dutch Rijksmuseum and generate a colour palette from it. This package 
-    was developed using the fantastic Rijksmuseum API.
+    was developed using the fantastic Rijksmuseum API 
+    <https://www.rijksmuseum.nl/api>.
 License: MIT + file LICENCE
 URL: https://vankesteren.github.io/rijkspalette
 BugReports: https://github.com/vankesteren/rijkspalette/issues
