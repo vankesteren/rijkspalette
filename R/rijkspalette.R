@@ -9,8 +9,10 @@
 #'
 #' @examples
 #' pal <- rijksPalette("Vermeer Letter")
+#' \donttest{
 #' plot(pal)
 #' barplot(1/sqrt(1:15), col = pal$palette(15))
+#' }
 #'
 #' @seealso \code{\link{tune}}
 #' @seealso \code{\link{explore}}
@@ -20,6 +22,7 @@ rijksPalette <- function(query) {
   call <- match.call()
   time <- Sys.time()
   downloadedImage <- rijksQuery(query)
+  if (is.na(file.size(downloadedImage))) return()
   img <- imager::load.image(downloadedImage)
   labmat <- imgToLabmat(img)
   cols <- labmatToPalette(labmat, 5, 0.75)

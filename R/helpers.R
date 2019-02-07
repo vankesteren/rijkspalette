@@ -80,10 +80,16 @@ rijksQuery <- function(query) {
   if (length(result$artObjects) == 0) stop("Query returned no results")
   images <- result$artObjects[result$artObjects$hasImage,]
   if (nrow(images) == 0) stop("Query returned no results")
-  imgurl <- paste0(images[1,]$webImage$url, "=s512")
+  imgurl <- gsub("=s0$", replacement = "=s512", images[1,]$webImage$url, perl = TRUE)
   filename <- tempfile("image", fileext = ".jpg")
-  utils::download.file(url = imgurl, destfile = filename, mode = "wb",
+
+  tryCatch(
+    suppressWarnings(
+    utils::download.file(url = imgurl, destfile = filename, mode = "wb",
                        quiet = TRUE)
+    ),
+    error = function(e) { message("Image unavailable") }
+  )
   return(filename)
 }
 
