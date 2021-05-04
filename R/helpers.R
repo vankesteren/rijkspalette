@@ -72,7 +72,7 @@ suffix <- "&type=schilderij&key=1nPNPlLc&format=json"
 
 #' Rijksquery
 #'
-#' performs query of the Rijksmuseum API
+#' performs query of the Rijksmuseum API. Fails gracefully if website does not respond.
 #'
 #' @keywords internal
 rijksQuery <- function(query) {
@@ -85,8 +85,7 @@ rijksQuery <- function(query) {
 
   tryCatch(
     suppressWarnings(
-    utils::download.file(url = imgurl, destfile = filename, mode = "wb",
-                       quiet = TRUE)
+      utils::download.file(url = imgurl, destfile = filename, mode = "wb", quiet = TRUE)
     ),
     error = function(e) { message("Image unavailable") }
   )

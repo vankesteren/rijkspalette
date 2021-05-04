@@ -17,8 +17,8 @@ This function queries the Rijksmuseum collection for paintings and returns
 a colour palette based on colours from that painting.
 }
 \examples{
-pal <- rijksPalette("Vermeer Letter")
 \donttest{
+pal <- rijksPalette("Vermeer Letter")
 plot(pal)
 barplot(1/sqrt(1:15), col = pal$palette(15))
 }
