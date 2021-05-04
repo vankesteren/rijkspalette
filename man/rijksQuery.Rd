@@ -7,6 +7,6 @@
 rijksQuery(query)
 }
 \description{
-performs query of the Rijksmuseum API
+performs query of the Rijksmuseum API. Fails gracefully if website does not respond.
 }
 \keyword{internal}

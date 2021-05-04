@@ -72,21 +72,37 @@ suffix <- "&type=schilderij&key=1nPNPlLc&format=json"
 
 #' Rijksquery
 #'
-#' performs query of the Rijksmuseum API
+#' performs query of the Rijksmuseum API. Fails gracefully if website does not respond.
 #'
 #' @keywords internal
 rijksQuery <- function(query) {
-  result <- jsonlite::fromJSON(paste0(prefix, utils::URLencode(query), suffix))
-  if (length(result$artObjects) == 0) stop("Query returned no results")
-  images <- result$artObjects[result$artObjects$hasImage,]
-  if (nrow(images) == 0) stop("Query returned no results")
-  imgurl <- gsub("=s0$", replacement = "=s512", images[1,]$webImage$url, perl = TRUE)
   filename <- tempfile("image", fileext = ".jpg")
+  link   <- paste0(prefix, utils::URLencode(query), suffix)
+
+  result <- tryCatch(
+    expr  = jsonlite::fromJSON(link),
+    error = function(e) {
+      message("Rijksmuseum unavailable")
+      return(list())
+    }
+  )
+  if (length(result$artObjects) == 0) {
+    message("Query returned no results")
+    return(filename)
+  }
+
+  images <- result$artObjects[result$artObjects$hasImage,]
+
+  if (nrow(images) == 0) {
+    message("Query returned no results")
+    return(filename)
+  }
+
+  imgurl <- gsub("=s0$", replacement = "=s512", images[1,]$webImage$url, perl = TRUE)
 
   tryCatch(
     suppressWarnings(
-    utils::download.file(url = imgurl, destfile = filename, mode = "wb",
-                       quiet = TRUE)
+      utils::download.file(url = imgurl, destfile = filename, mode = "wb", quiet = TRUE)
     ),
     error = function(e) { message("Image unavailable") }
   )
