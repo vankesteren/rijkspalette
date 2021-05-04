@@ -8,8 +8,8 @@
 #' @return an object of type \code{rijkspalette}
 #'
 #' @examples
-#' \donttest{
 #' pal <- rijksPalette("Vermeer Letter")
+#' \donttest{
 #' plot(pal)
 #' barplot(1/sqrt(1:15), col = pal$palette(15))
 #' }
